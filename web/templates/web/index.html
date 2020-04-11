@@ -1,0 +1,88 @@
+{% extends 'web/base.html' %}
+{% load static %}
+
+{% block content %}
+    <section>
+      <h1 class="h1 text-center mx-auto mt-4 py-5"><strong>Вакансии для <br>Junior-разработчиков</strong></h1>
+      <div class="row">
+        <div class="col-12 col-md-8 col-lg-6 offset-lg-3 offset-md-2">
+          <form class="form-inline mb-3">
+            <div class="form-group col-8 col-md-10 pl-0">
+              <input class="form-control w-100" type="search" placeholder="Найти работу или стажировку" aria-label="Найти работу или стажировку">
+            </div>
+            <div class="form-group col-4 col-md-2 pl-0">
+              <button class="btn btn-primary w-100" type="submit">Найти</button>
+            </div>
+          </form>
+          <p>Например: 
+            <a href="{% url 'sp_vacancies' 'frontend' %}" class="text-dark border-bottom border-dark m-1 text-decoration-none">Фронтенд</a> 
+            <a href="{% url 'sp_vacancies' 'backend' %}" class="text-dark border-bottom border-dark m-1 text-decoration-none">Бэкенд</a> 
+            <a href="{% url 'sp_vacancies' 'testing' %}" class="text-dark border-bottom border-dark m-1 text-decoration-none">Тестирование</a> 
+
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="mt-5 pt-3">
+      <h2 class="h2 font-weight-normal text-center mb-5">Вакансии по рубрикам</h2>
+      <div class="row mb-0">
+        {% for specialty1 in specialties1 %}
+        <div class="col-6 col-md-6 col-lg-3">
+          <div class="card pt-4 text-center mb-4">
+            <img class="mx-auto d-block" src="{% static specialty1.picture %}" width="80" height="80" alt="">
+            <div class="card-body">
+              <p class="card-text mb-2">{{ specialty1.title }}</p>
+              <p class="card-text"><a href="{% url 'sp_vacancies' specialty1.code %}">{{ specialty1.total_vacs }} вакансий</a></p>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      <div class="row mb-4">
+        {% for specialty2 in specialties2 %}  
+        <div class="col-6 col-md-6 col-lg-3">
+          <div class="card pt-4 text-center mb-4">
+            <img class="mx-auto d-block" src="{% static specialty2.picture %}" width="80" height="80" alt="">
+            <div class="card-body">
+              <p class="card-text mb-2">{{ specialty2.title }}</p>
+              <p class="card-text"><a href="{% url 'sp_vacancies' specialty2.code %}">{{ specialty2.total_vacs }} вакансий</a></p>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </section>
+
+    <section class="my-5 pt-3">
+      <h2 class="h2 font-weight-normal text-center mb-5">Нам доверяют лучшие компании</h2>
+      <div class="row mb-0">
+        {% for company1 in companies1 %}
+        <div class="col-6 col-md-6 col-lg-3">
+          <div class="card pt-4 text-center mb-4">
+            <a href="#" style="max-width: 150px;" class="mx-auto d-block">
+              <img class="mx-auto d-block mw-100" src="{% static company1.logo %}" alt="">
+            </a>
+            <div class="card-body">
+              <p class="card-text"><a href="{% url 'company' company1.id %}">{{ company1.total_vacs }} вакансий</a></p>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      <div class="row mb-4">
+        {% for company2 in companies2 %}
+        <div class="col-6 col-md-6 col-lg-3">
+          <div class="card pt-5 text-center mb-4">
+            <a href="#" style="max-width: 150px;" class="mx-auto d-block">
+              <img class="mx-auto d-block mw-100" src="{% static company2.logo %}" width="150" height="80" alt="">
+            </a>
+            <div class="card-body">
+              <p class="card-text"><a href="{% url 'company' company2.id %}">{{ company2.total_vacs }} вакансий</a></p>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </section>
+{% endblock content %}
